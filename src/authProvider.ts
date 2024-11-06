@@ -1,40 +1,46 @@
 import { AuthProvider, HttpError } from "react-admin";
-import data from "./users.json";
-
+import axios from "axios";
 /**
  * This authProvider is only for test purposes. Don't use it in production.
  */
-export const authProvider: AuthProvider = {
-  login: ({ username, password }) => {
-    const user = data.users.find(
-      (u) => u.username === username && u.password === password
-    );
+const authProvider: AuthProvider = {
+  login: async ({ email, password }) => {
+    try {
+      const response = await axios.post('https://services-hpc.onrender.com/users/login', {
+        email,
+        password,
+      },{
+        headers: {
+            'Content-Type': 'application/json'
+        }
+      });
 
-    if (user) {
-      // eslint-disable-next-line no-unused-vars
-      let { password, ...userToPersist } = user;
-      localStorage.setItem("user", JSON.stringify(userToPersist));
-      return Promise.resolve();
+      if (response.status < 200 || response.status >= 300) {
+        throw new Error(response.statusText);
+      }
+
+      const auth = response.data.authToken;
+      localStorage.setItem('auth', JSON.stringify(auth));
+      return Promise.resolve(response);
+    } catch (error) {
+      throw new Error('Network error');
+      return Promise.reject(error);
     }
-
-    return Promise.reject(
-      new HttpError("Unauthorized", 401, {
-        message: "Invalid username or password",
-      })
-    );
   },
+
   logout: () => {
-    localStorage.removeItem("user");
+    localStorage.removeItem("auth");
     return Promise.resolve();
   },
+
   checkError: () => Promise.resolve(),
   checkAuth: () =>
-    localStorage.getItem("user") ? Promise.resolve() : Promise.reject(),
+    localStorage.getItem("auth") ? Promise.resolve() : Promise.reject(),
   getPermissions: () => {
-    return Promise.resolve(undefined);
+    return Promise.resolve('admin');
   },
   getIdentity: () => {
-    const persistedUser = localStorage.getItem("user");
+    const persistedUser = localStorage.getItem("auth");
     const user = persistedUser ? JSON.parse(persistedUser) : null;
 
     return Promise.resolve(user);
