@@ -1,5 +1,5 @@
 {
-  "name": "hpc-admin",
+  "name": "cartografias-admin",
   "private": true,
   "scripts": {
     "dev": "vite",

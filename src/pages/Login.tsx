@@ -53,7 +53,7 @@ const MyLoginPage = () => {
                             Iniciar Sesión
                         </h1>
                         <h3 className={'text-xl font-normal text-center mb-6 capitalize text-black'}>
-                            Administrador Cartografías O'Higgins
+                            Administración Cartografías O'Higgins
                         </h3>
 
                         {msg && <Error alerta={error} />}
@@ -95,7 +95,7 @@ const MyLoginPage = () => {
                             />
                         </div>
                         <a
-                            href={'https://hpc-uoh.vercel.app/olvide-contrasena'}
+                            href={'http://localhost:5173/olvide-contrasena'}
                             className="text-sky-600 hover:text-sky-500 transition-colors"
                         >
                             ¿Has olvidado tu <span>contraseña?</span>

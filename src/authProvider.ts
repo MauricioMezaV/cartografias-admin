@@ -1,12 +1,10 @@
 import { AuthProvider, HttpError } from "react-admin";
 import axios from "axios";
-/**
- * This authProvider is only for test purposes. Don't use it in production.
- */
+
 const authProvider: AuthProvider = {
   login: async ({ email, password }) => {
     try {
-      const response = await axios.post('https://services-hpc.onrender.com/users/login', {
+      const response = await axios.post('http://localhost:8081/users/login', {
         email,
         password,
       },{

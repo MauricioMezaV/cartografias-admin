@@ -2,7 +2,7 @@ import { fetchUtils } from 'react-admin';
 import queryString from 'query-string';
 import uploadCapabilities from "./helpers/uploadCapabilities";
 
-const apiUrl = 'https://services-hpc.onrender.com';
+const apiUrl = 'http://localhost:8081';
 const httpClient = fetchUtils.fetchJson;
 
 export default {
@@ -15,12 +15,15 @@ export default {
             filter: JSON.stringify(params.filter),
         };
         const url = `${apiUrl}/${resource}?${queryString.stringify(query)}`;
-        const { json, headers } = await httpClient(url);
-        console.log(json)
+        const { json } = await httpClient(url);
+    
         return {
-            data: json.rows.map(item => ({ ...item, id: item._id })),
-            total: json.total
-        }
+            data: json.rows.map(item => ({
+                ...item,
+                id: item._id.$oid // Extraer $oid como ID
+            })),
+            total: json.total // Asegúrate de que exista un campo `total`
+        };
     },
 
     getOne: async (resource, params) => {

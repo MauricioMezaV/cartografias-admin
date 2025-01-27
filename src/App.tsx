@@ -27,6 +27,11 @@ import { PlacesCreate } from "./resources/places/create";
 import { PlacesEdit } from "./resources/places/edit";
 import { PlacesIcon } from "./resources/places/icon";
 
+import { VictimList } from "./resources/victims/list";
+import { VictimCreate } from "./resources/victims/create";
+import { VictimEdit } from "./resources/victims/edit";
+import { VictimIcon } from "./resources/victims/icon";
+
 // Styles
 import {createTheme} from "@mui/material";
 
@@ -79,6 +84,13 @@ export const App = () => (
       edit={MemorialsEdit}
       create={MemorialsCreate}
       icon={MemorialsIcon}
+    />
+    <Resource
+      name="victims"
+      list={VictimList}
+      edit={VictimEdit}
+      create={VictimCreate}
+      icon={VictimIcon}
     />
   </Admin>
 );
