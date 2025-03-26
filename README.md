@@ -1,4 +1,9 @@
-# cartografias-admin
+# Proyecto Cartografias de la Memoria Ohiggins (Sitio de Administración)
+
+## Se está utilizando ReactJS como framework
+
+Esta parte del proyecto es la que más verde está, queda definir correctamente las cards para que se puedan mostrar, agregar y editar correctamente, y que se obtenga correctamente la data desde el provider
+
 
 ## Installation
 

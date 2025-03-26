@@ -17,7 +17,7 @@ import { RichTextInput } from 'ra-input-rich-text';
 
 export const MemorialsCreate = (props: any) => {
     return (
-        <Create {...props} transform={transformCoordinates}>
+        <Create {...props}>
             <SimpleForm>
                 <Card variant="outlined" sx={{ minWidth: "100%", boxShadow: 1 }}>
                     <CardHeader title="Crear memorial" />

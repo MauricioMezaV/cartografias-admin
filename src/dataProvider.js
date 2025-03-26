@@ -2,7 +2,7 @@ import { fetchUtils } from 'react-admin';
 import queryString from 'query-string';
 import uploadCapabilities from "./helpers/uploadCapabilities";
 
-const apiUrl = 'http://localhost:8081';
+const apiUrl = 'https://cartografias-back.onrender.com';
 const httpClient = fetchUtils.fetchJson;
 
 export default {
@@ -18,7 +18,7 @@ export default {
         const { json } = await httpClient(url);
     
         return {
-            data: json.rows.map(item => ({
+            data: json.map(item => ({
                 ...item,
                 id: item._id.$oid // Extraer $oid como ID
             })),
